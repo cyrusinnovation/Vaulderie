@@ -6,6 +6,7 @@ A webapp to make group Vaulderie less painful in LARPs
 ----
 
 Everyone puts in:
+
     Alpha: 7 traits
     Starting rating: NA/Alpha   2/beta   2/Charlie   1/delta   8/echo
 
@@ -22,7 +23,9 @@ Everyone puts in:
     Starting rating: 6/Alpha   5/beta   5/Charlie   1/delta   NA/echo
 
 All these values are added up
+
     7+6+5+5+5=28 traits in all
+    
 Everyone takes out what they put in randomly
 
     (7) Alpha takes 7. 1 of his own, 2 from beta, 3 from Charlie, 0 from Delta and 1 from echo
