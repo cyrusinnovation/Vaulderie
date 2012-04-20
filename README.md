@@ -3,6 +3,11 @@ Vaulderie
 
 A webapp to make group Vaulderie less painful in LARPs
 
+Requirements for development:
+=============================
+cd Vaulderie
+npm install sinon # That's right, not npm install -g
+
 ----
 
 Everyone puts in:
