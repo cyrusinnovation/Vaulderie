@@ -2,24 +2,45 @@
   <head>
     <title>Vaulderie</title>
     <script type="text/javascript" src='rps.js'></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript">
-			$(document).ready(function(){
-				$('#big-searchbox ').click(function(){
-          $('<p/>').text("Brujaha").appendTo($('#myDiv'));
-				});
-			});
-    </script>
+    <script type="text/javascript" src="jquery.min.js"></script>
   </head>
 
   <body>
-    <div id="myDiv"> </div>
-    <form accept-charset="UTF-8" action="/search" id="big-search" method="post">
-      <div style="margin:0;padding:0;display:inline">
-        <input name="utf8" type="hidden" value="&#x2713;" />
-        <input name="authenticity_token" type="hidden" value="iQirDXJ57WpJYySDPP5KFQnbF6idf02br4EOv0W2fdA=" />
+    <form accept-charset="UTF-8" action="" id="big-search" method="post">
+      <input id="vamp" maxlength="40" placeholder="Character name" type="text" value="" />
+      <input id='newcharname' name="commit" type="button" value="Add Character" />
+    </form>
+
+    <form action="./add_result.php" id="emailform" name="emailform" method="post" >
+      <div id="charinput">
       </div>
-      <input id="big-searchbox" maxlength="40" name="q" placeholder="Character name" type="text" value="" />
-      <input id='newcharname' name="commit" type="submit" value="Go!" />
+    </form>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $("#newcharname").click(function(){
+
+            var numItems = $('.charfield').length;
+            var newname = $('#vamp').val();
+
+              var charname_array = [];
+              var i;
+              for(i=0;i<numItems;i++){
+                charname_value = $("#charnamefield"+i).val();
+                charname_array.push(charname_value);//get values from fields first
+              }
+
+              $char_input_html = $("#charinput").html();
+              $char_input_html += newname + '<br/>';
+              //$char_input_html += 'Character '+(i+1)+ ': <input id="charnamefield'+numItems+'" class="charfield" name="charnames[]" value="" />';
+              $("#charinput").html($char_input_html);//get new field
+
+              //set value back to each field
+              for(i=0;i<numItems;i++){
+                $("#charnamefield"+i).val(charname_array[i]);//send values back to fields
+              }
+          });
+      });
+    </script>
   </body>
 </html>
+
