@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Vaulderie</title>
+    <script type="text/javascript" src='rps.js'></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+			$(document).ready(function(){
+				$('#big-searchbox ').click(function(){
+          $('<p/>').text("Brujaha").appendTo($('#myDiv'));
+				});
+			});
+    </script>
+  </head>
+
+  <body>
+    <div id="myDiv"> </div>
+    <form accept-charset="UTF-8" action="/search" id="big-search" method="post">
+      <div style="margin:0;padding:0;display:inline">
+        <input name="utf8" type="hidden" value="&#x2713;" />
+        <input name="authenticity_token" type="hidden" value="iQirDXJ57WpJYySDPP5KFQnbF6idf02br4EOv0W2fdA=" />
+      </div>
+      <input id="big-searchbox" maxlength="40" name="q" placeholder="Character name" type="text" value="" />
+      <input id='newcharname' name="commit" type="submit" value="Go!" />
+  </body>
+</html>
