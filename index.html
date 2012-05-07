@@ -11,35 +11,47 @@
       <input id='newcharname' name="commit" type="button" value="Add Character" />
     </form>
 
-    <form action="./add_result.php" id="emailform" name="emailform" method="post" >
+    <form action="#" id="emailform" name="emailform" method="post" >
       <div id="charinput">
       </div>
     </form>
     <script type="text/javascript">
-      $(document).ready(function(){
-          $("#newcharname").click(function(){
+      function existingCharacters(charCount) {
 
-            var numItems = $('.charfield').length;
-            var newname = $('#vamp').val();
+        var charname_array = [];
+        for(var i=0; i < charCount; i++){
+          var charname_value = $("#charnamefield"+i).val();
+          charname_array.push(charname_value);
+        }
+        return charname_array;
+      }
 
-              var charname_array = [];
-              var i;
-              for(i=0;i<numItems;i++){
-                charname_value = $("#charnamefield"+i).val();
-                charname_array.push(charname_value);//get values from fields first
-              }
+      function reinstoreExistingValues(charCount, charNames) {
 
-              $char_input_html = $("#charinput").html();
-              $char_input_html += newname + '<br/>';
-              //$char_input_html += 'Character '+(i+1)+ ': <input id="charnamefield'+numItems+'" class="charfield" name="charnames[]" value="" />';
-              $("#charinput").html($char_input_html);//get new field
+        //set value back to each field
+        for(var i=0; i < charCount; i++){
+          $("#charnamefield"+i).val(charNames[i]);//send values back to fields
+        }
+      }
 
-              //set value back to each field
-              for(i=0;i<numItems;i++){
-                $("#charnamefield"+i).val(charname_array[i]);//send values back to fields
-              }
-          });
-      });
+      function superAddCharacter() {
+        var charCount = $('.charfield').length;
+        var charNames = existingCharacters(charCount);
+
+        var newname = $('#vamp').val();
+        $char_input_html = $("#charinput").html();
+        $char_input_html += newname + '<br/>';
+        //$char_input_html += 'Character '+(i+1)+ ': <input id="charnamefield'+numItems+'" class="charfield" name="charnames[]" value="" />';
+        $("#charinput").html($char_input_html);//get new field
+
+        reinstoreExistingValues(charCount, charNames);
+      }
+
+      function bindNewCharNameButton() {
+        $("#newcharname").click(superAddCharacter);
+      }
+
+      $(document).ready(bindNewCharNameButton());
     </script>
   </body>
 </html>
