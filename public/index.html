@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>Vaulderie</title>
+    <link rel="stylesheet" href="./js/jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.css" />
+    <script type="text/javascript" src='./js/rps.js'></script>
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/firstpage.js"></script>
+    <script type="text/javascript" src="./js/jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.js"></script>
+    <script type="text/javascript" src="./js/jsrender.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+  </head>
+
+  <body>
+    <div id="home-page" data-role="page">
+      <div data-role="header">
+        <h1>Vaulderie</h1>
+      </div>
+
+      <div data-role="content"> 
+        <form id="number-chars">
+          <label for="char-count">How many characters are involved?</label>
+          <select id="char-count">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </form>
+        <a href="#char-1" data-role="button">Next</a>
+      </div>
+    </div>
+
+
+    <form accept-charset="UTF-8" action="" id="big-search" method="post">
+      <input id="vamp" maxlength="40" placeholder="Character name" type="text" value="" />
+      <input id='newcharname' name="commit" type="button" value="Add Character" />
+    </form>
+
+    <form action="#" id="emailform" name="emailform" method="post" >
+      <div id="charinput">
+      </div>
+    </form>
+    <script type="text/javascript">
+      $(document).ready(bindNewCharNameButton());
+    </script>
+
+    <script id="page-markup" type="text/x-jquery-tmpl">
+      <div data-role="page" id="char-{{:id}}">
+        <div data-role="header">
+          <h1>Character {{:id}}</h1>
+        </div>
+        <div data-role="content">
+          {{if nextId}}
+          <a href="#char-{{:nextId}}">Next</a>
+          {{else}}
+          <a href="#calculate">Calculate</a>
+          {{/if}}
+        </div>
+      </div>
+    </script>
+  </body>
+</html>
