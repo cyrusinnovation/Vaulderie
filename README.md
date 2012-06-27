@@ -11,22 +11,22 @@ npm install sinon # That's right, not npm install -g
 
 ----
 
-Everyone puts in:
+Everyone puts in (max value you can put in is 20):
 
     Alpha: 7 traits
-    Starting rating: NA/Alpha   2/beta   2/Charlie   1/delta   8/echo
-
     Beta: 6
-    Starting rating: 3/Alpha   NA/beta   1/Charlie   1/delta   9/echo
-
     Charlie : 5
-    Starting rating: 5/Alpha   6/beta   NA/Charlie   2/delta   7/echo
-
     Delta: 5
-    Starting rating: 8/Alpha   7/beta    6/Charlie   NA/delta   9/echo
-
     Echo: 5
-    Starting rating: 6/Alpha   5/beta   5/Charlie   1/delta   NA/echo
+    
+Here are the bond ratings before the Vaulderie (max bond rating is 10):
+
+    
+    Alpha Starting rating  : NA/Alpha   2/beta   2/Charlie   1/delta   8/echo
+    Beta Starting rating   : 3/Alpha   NA/beta   1/Charlie   1/delta   9/echo
+    Charlie Starting rating: 5/Alpha   6/beta   NA/Charlie   2/delta   7/echo
+    Delta Starting rating  : 8/Alpha   7/beta    6/Charlie   NA/delta   9/echo
+    Echo Starting rating   : 6/Alpha   5/beta   5/Charlie   1/delta   NA/echo
 
 All these values are added up
 
@@ -41,7 +41,7 @@ Everyone takes out what they put in randomly
     (5)Echo takes 5. 1 from alpha, 3 from beta, 0 from Charlie, 2 from delta and 1 from echo
     
 Now is the hard part,
-Each player must test against a each other to see if there rating go up.
+Each player must test against a each other to see if their ratings go up. If a rating is 10, it can only stay 10 or go down 1.
 Now let’s break down the results for Alpha:
 
     pulled one of his own traits which does nothing
