@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="./js/jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.css" />
     <script type="text/javascript" src='./js/rps.js'></script>
     <script type="text/javascript" src="./js/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/firstpage.js"></script>
     <script type="text/javascript" src="./js/jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.js"></script>
     <script type="text/javascript" src="./js/jsrender.js"></script>
     <script type="text/javascript" src="./js/app.js"></script>
@@ -33,20 +32,6 @@
         <a href="#char-1" data-role="button">Next</a>
       </div>
     </div>
-
-
-    <form accept-charset="UTF-8" action="" id="big-search" method="post">
-      <input id="vamp" maxlength="40" placeholder="Character name" type="text" value="" />
-      <input id='newcharname' name="commit" type="button" value="Add Character" />
-    </form>
-
-    <form action="#" id="emailform" name="emailform" method="post" >
-      <div id="charinput">
-      </div>
-    </form>
-    <script type="text/javascript">
-      $(document).ready(bindNewCharNameButton());
-    </script>
 
     <script id="page-markup" type="text/x-jquery-tmpl">
       <div data-role="page" id="char-{{:id}}">
