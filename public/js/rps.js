@@ -30,18 +30,18 @@ RPS = {
   },
   kind_rating_change: function() {
     var battle = this.do_battle();
-    if (this.lose(battle) ) return 1;
-    if (this.draw(battle) ) return 0;
-    if (this.win(battle)  ) return this.pray_for_a_win();
+    if (this.lose(battle) ) { return 1; }
+    if (this.draw(battle) ) { return 0; }
+    if (this.win(battle)  ) { return this.pray_for_a_win(); }
   },
   mean_rating_change: function() {
     var battle = this.do_battle();
-    if (this.lose(battle) || this.draw(battle)) return 1;
+    if (this.lose(battle) || this.draw(battle)) { return 1; }
     return this.pray_for_a_win();
   },
   pray_for_a_win: function() {
     var battle = this.do_battle();
-    if (this.win(battle)) return -1;
+    if (this.win(battle)) { return -1; }
     return 0;
   }
 
