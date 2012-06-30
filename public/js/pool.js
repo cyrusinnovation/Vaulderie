@@ -1,5 +1,8 @@
 Array.prototype.diff = function(a) {
-      return this.filter(function(i) {return !(a.indexOf(i) > -1);});
+  return this.filter(function(i) {
+    return !(a.indexOf(i) > -1);
+  }
+                    );
 };
 
 Pool = {
@@ -13,7 +16,7 @@ Pool = {
     return blood;
   },
 
-  withdraw: function(pointsToWithdraw, pool) {
+  poolAfterVampireWithdraws: function(pointsToWithdraw, pool) {
     var poolCopy = pool.slice(0);
 
     for(var i = 0; i < pointsToWithdraw; i++) {
@@ -25,32 +28,29 @@ Pool = {
   },
 
   redistribute: function(poolDistribution) {  
-    var pool = this.fill(poolDistribution);
+    var completePool = this.fill(poolDistribution);
+    var depletablePool = completePool.slice(0);
     var newDistribution = {};
-    console.log("\n\n\n\n\n\n");
-    console.log("TOGGLE REDIS");
-    console.log(poolDistribution);
-    console.log("YE OLDE POOL");
-    console.log(pool);
+
     for(var vampName in poolDistribution) {
-      console.log(vampName + " goes into the woods");
+
       var pointsToWithdraw = poolDistribution[vampName];
-      console.log("and finds: " + pointsToWithdraw + " daisies.");
-      var tempPool = this.withdraw(pointsToWithdraw, pool);
-      console.log("He plucks these:");
-      console.log(tempPool);
-      console.log("And supposedly I get one output when I diff pool and tempPool:");
-      var bloodOwners = this.format(pool.diff(tempPool), pool);
-      console.log(bloodOwners);
+      var poolAfterVampireDrinks = this.poolAfterVampireWithdraws(pointsToWithdraw, depletablePool);
+      
+      var pointsDrunkByVampire = depletablePool.diff(poolAfterVampireDrinks);
+
+      var bloodOwners = this.format(pointsDrunkByVampire, completePool);
       newDistribution[vampName] = bloodOwners;
+      depletablePool = poolAfterVampireDrinks;
     }
-    console.log("TOGGLE REDIS");
+    console.log("-------------------------");
+    console.log(newDistribution);
+    console.log("-------------------------");
     return newDistribution;
   },
 
   format: function(drawnBlood, pool) {
     var formattedContent = this.prepare(pool);
-    console.log(drawnBlood);
     drawnBlood.forEach(function(el) {
       formattedContent[el] += 1;
     });

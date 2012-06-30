@@ -1,4 +1,4 @@
-var sinon = require('../../node_modules/sinon/lib/sinon.js');
+var sinon = require('../node_modules/sinon/lib/sinon.js');
 var mock = sinon.mock;
 var stub = sinon.stub;
 require('../public/js/rps');
@@ -18,7 +18,7 @@ test('Rock loses to Paper', function() {
 });
 
 test('Rock and Rock cause a draw', function() {
-  ok(RPS.fight('Rock', 'Rock') == 0, 'Rock and Rock should be a draw');
+  ok(RPS.fight('Rock', 'Rock') === 0, 'Rock and Rock should be a draw');
 });
 
 test('you win when ... it is a won fight', function() {
@@ -40,9 +40,9 @@ test('Pray for a win means rating goes down if you win, stays same if you lose',
   battle.returns(1);
   ok(RPS.pray_for_a_win() == -1);
   battle.returns(0);
-  ok(RPS.pray_for_a_win() == 0);
+  ok(RPS.pray_for_a_win() === 0);
   battle.returns(-1);
-  ok(RPS.pray_for_a_win() == 0);
+  ok(RPS.pray_for_a_win() === 0);
   RPS.do_battle.restore();
 });
 
@@ -58,7 +58,7 @@ test('rating goes up if you lose the first fight', function() {
 test('rating stays the same if you draw the first fight', function() {
   var battle = stub(RPS, 'do_battle');
   battle.returns(0);
-  ok(RPS.kind_rating_change() == 0);
+  ok(RPS.kind_rating_change() === 0);
   RPS.do_battle.restore();
 });
 
@@ -74,7 +74,7 @@ test('win then do not win, rating is same', function() {
   battle.returns(1);
   var pray = stub(RPS, 'pray_for_a_win');
   pray.returns(0);
-  ok(RPS.kind_rating_change() == 0);
+  ok(RPS.kind_rating_change() === 0);
   RPS.do_battle.restore();
   RPS.pray_for_a_win.restore();
 });
@@ -102,7 +102,7 @@ test('rating stays the same if you win then do not win', function() {
   battle.returns(1);
   var pray = stub(RPS, 'pray_for_a_win');
   pray.returns(0);
-  ok(RPS.mean_rating_change() == 0);
+  ok(RPS.mean_rating_change() === 0);
   RPS.do_battle.restore();
   RPS.pray_for_a_win.restore();
 });

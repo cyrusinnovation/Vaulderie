@@ -51,5 +51,5 @@ test('ye Olde Integration Test', function() {
   var oldAndNewRatings = Calculate.generateRatings(myData(), bloodDrawnBackFromPool);
   console.log("OLD AND NEW RATINGS");
   console.log(oldAndNewRatings);
-  ok(false);
+  ok(false, "The integration test does not pass.");
 });

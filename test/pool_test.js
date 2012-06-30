@@ -14,16 +14,15 @@ test('has blood from many people', function() {
 
 test('can take x points of blood randomly', function() {
   var pool = Pool.fill({'Brujaha': 5, 'Ventruand': 2});
-  var newPool = Pool.withdraw(5, pool);
+  var newPool = Pool.poolAfterVampireWithdraws(5, pool);
   ok(newPool.length === 2);
 });
 
 test('returns an object with vampName and what blood was withdrawn', function() {
   var bloodDistribution = Pool.redistribute({'Brujaha': 5, 'Ventruand': 2, 'Toreador': 2});
   for(var vampName in bloodDistribution) {
-    var blood = bloodDistribution[vampName];
-    for(var i in blood['bloodOwner']) {
-      ok(blood['bloodOwner'][i] >= 0);
+    for(var bloodSource in bloodDistribution[vampName]) {
+      ok(bloodDistribution[vampName][bloodSource] >= 0);
     }
   }
 });
