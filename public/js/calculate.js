@@ -1,4 +1,4 @@
-require('./rps.js');
+//require('./rps.js');
 Calculate = {
   getBloodGiven: function(vaulderie) {
     var bloodGiven = {};
