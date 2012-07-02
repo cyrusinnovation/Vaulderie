@@ -1,4 +1,4 @@
-var sinon = require('../node_modules/sinon/lib/sinon.js');
+var sinon = require('../../node_modules/sinon/lib/sinon.js');
 var mock = sinon.mock;
 var stub = sinon.stub;
 require('../public/js/rps');
@@ -10,27 +10,27 @@ function ok(expr, msg) {
 suite('Rock, Paper, Scissors:');
 
 test('Paper beats Rock', function() {
-  ok(RPS.fight('Paper', 'Rock') == 1, 'Rock should not beat paper');
+  ok(RPS.fight(3, 1) == 1, 'Rock should not beat paper');
 });
 
 test('Rock loses to Paper', function() {
-  ok(RPS.fight('Rock', 'Paper') == -1, 'Paper should not lose to Rock');
+  ok(RPS.fight(1, 3) == -1, 'Paper should not lose to Rock');
 });
 
 test('Rock and Rock cause a draw', function() {
-  ok(RPS.fight('Rock', 'Rock') === 0, 'Rock and Rock should be a draw');
+  ok(RPS.fight(1, 1) === 0, 'Rock and Rock should be a draw');
 });
 
 test('you win when ... it is a won fight', function() {
-  ok(RPS.win(RPS.fight('Paper', 'Rock')));
+  ok(RPS.win(RPS.fight(3, 1)));
 });
 
 test('you draw when ... it is a drawn fight', function() {
-  ok(RPS.draw(RPS.fight('Paper', 'Paper')));
+  ok(RPS.draw(RPS.fight(3, 3)));
 });
 
 test('you lose when ... it is a lost fight', function() {
-  ok(RPS.lose(RPS.fight('Rock', 'Paper')));
+  ok(RPS.lose(RPS.fight(1, 3)));
 });
 
 suite('Miscellaneous refactored methods for rating change');

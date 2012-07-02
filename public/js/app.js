@@ -44,7 +44,18 @@ $(document).ready(function () {
   };
 
   function calculate() {
-    chars = $('#char-');
+//    var names, values, result;
+//
+//    result = {};
+//    names = $("#char-1 input[type='text']").map(function(idx, el) {
+//      return $(el).val();
+//    });
+//
+//    values = $("#char-1 select").map(function(idx, el) {
+//      return $(el).val();
+//    });
+
+
   };
 
   $(document).on("pagebeforechange", function (e, data) {

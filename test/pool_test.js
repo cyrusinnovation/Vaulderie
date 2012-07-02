@@ -41,3 +41,4 @@ test('initializes an object showing all vamps who put blood in the pool', functi
   ok(obj['Ventruand'] === 0);
   ok(obj['Toreador'] === 0);
 });
+

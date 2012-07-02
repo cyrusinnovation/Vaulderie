@@ -1,19 +1,20 @@
 RPS = {
   move_that_beats: {
-    'Rock': 'Scissors',
-    'Paper': 'Rock',
-    'Scissors': 'Paper'
+    1: 2,
+    3: 1,
+    2: 3
   }
   ,
   play: function() {
-    Math.floor( (Math.random() * 3) + 1);
+    return Math.floor( (Math.random() * 3) + 1);
   }
   ,
   fight: function(r1, r2) {
-    if(this.move_that_beats[r1] == r2)
+    if(this.move_that_beats[r1] == r2) {
       return 1;
-    else if(r1 == r2)
+    } else if(r1 == r2) {
       return 0;
+    }
     return -1;
   },
   do_battle: function() {

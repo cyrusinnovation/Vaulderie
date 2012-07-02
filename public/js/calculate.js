@@ -15,12 +15,10 @@ Calculate = {
     startingValues.forEach(function(el) {
       var currentVamp = el['name'];
       ratings[currentVamp] = {};
-      //console.log(bloodFromPool);
       var bloodTaken = bloodFromPool[currentVamp]; 
       for(var vamp in bloodTaken) {
         var drunkBlood = bloodTaken[vamp];
 
-      //  console.log(drunkBlood);
         if(vamp === currentVamp)
           continue;
 
@@ -33,6 +31,27 @@ Calculate = {
       }
     });
     return ratings;
+  },
+
+  diffRatings: function(startingValues, ratingChanges) {
+    var newRatings = startingValues.slice(0);
+    for(var vampire in startingValues) {
+      var currentVamp = startingValues[vampire];
+      var name = currentVamp['name'];
+      for(var vampName in ratingChanges[name]) {
+        var currentRating = newRatings[vampire]['ratings'][vampName];
+        var ratingChange = ratingChanges[name][vampName];
+        newRatings[vampire]['ratings'][vampName] = currentRating + ratingChange;
+      }
+    }
+    return newRatings;
+  },
+
+  ratings: function(startingValues) {
+    var bloodDrawnBackFromPool = Pool.redistribute(this.getBloodGiven(startingValues));
+    var ratingChanges = this.generateRatings(startingValues, bloodDrawnBackFromPool);
+    var newRatings = this.diffRatings(startingValues, ratingChanges);
+    return newRatings;
   }
 
 };

@@ -1,9 +1,3 @@
-Array.prototype.diff = function(a) {
-  return this.filter(function(i) {
-    return !(a.indexOf(i) > -1);
-  }
-                    );
-};
 
 Pool = {
   fill: function(obj) {
@@ -18,13 +12,14 @@ Pool = {
 
   poolAfterVampireWithdraws: function(pointsToWithdraw, pool) {
     var poolCopy = pool.slice(0);
+    var pointsDrunkByVamp = [];
 
     for(var i = 0; i < pointsToWithdraw; i++) {
       var indexOfBloodPointToRemove = Math.floor( Math.random() * (poolCopy.length - 1));
-      poolCopy.splice(indexOfBloodPointToRemove, 1);
+      pointsDrunkByVamp.push( poolCopy.splice(indexOfBloodPointToRemove, 1) );
     }
 
-    return poolCopy;
+    return [poolCopy, pointsDrunkByVamp];
   },
 
   redistribute: function(poolDistribution) {  
@@ -35,17 +30,14 @@ Pool = {
     for(var vampName in poolDistribution) {
 
       var pointsToWithdraw = poolDistribution[vampName];
-      var poolAfterVampireDrinks = this.poolAfterVampireWithdraws(pointsToWithdraw, depletablePool);
-      
-      var pointsDrunkByVampire = depletablePool.diff(poolAfterVampireDrinks);
 
+      var tempResults = this.poolAfterVampireWithdraws(pointsToWithdraw, depletablePool);
+      var poolAfterVampireDrinks = tempResults[0];
+      var pointsDrunkByVampire = tempResults[1];
       var bloodOwners = this.format(pointsDrunkByVampire, completePool);
       newDistribution[vampName] = bloodOwners;
       depletablePool = poolAfterVampireDrinks;
     }
-    console.log("-------------------------");
-    console.log(newDistribution);
-    console.log("-------------------------");
     return newDistribution;
   },
 
@@ -63,6 +55,6 @@ Pool = {
       vamps[el] = 0;
     });
     return vamps;
-  }
+  },
 
 }
