@@ -56,6 +56,20 @@
       </div>
     </div>
 
+    <script id="grid" type="text/x-jquery-tmpl">
+      <div data-role="page" data-theme="a">
+        <div data-role="header"><h1>Vaulderie</h1></div>
+        <div data-role="content">
+          <h3 style='text-align:center;'>Contribution</h3>
+          <div class="ui-grid-a"
+            {{for currentChar render '#char-inputs'}}
+          <h3 style='text-align:center;'>Bond Rating</h3>
+            {{for otherChars render '#char-inputs'}}
+        </div>
+      </div>
+
+    </script>
+
     <script id="char-inputs" type="text/x-jquery-tmpl">
       <div class="ui-block-a field">
         <input type="text" id="char-{{:id}}-name" {{:enabled}} value="{{:name}}" placeholder="Character Name" />
@@ -101,7 +115,7 @@
           <a href="#results-{{:nextPage}}" data-role="button">Next!</a>
           {{else}}
             <h2> Now go forth and LARP!</h2>
-            <a href="index.html">Let's do that again!</a>
+            <a href="index.html" data-role="button">Let's do that again!</a>
           {{/if}}
         </div>        
       </div>

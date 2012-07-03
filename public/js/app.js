@@ -1,13 +1,3 @@
-// remember: http://jquerymobile.com/demos/1.1.0/docs/api/events.html
-// tap, taphold, swipe, swipeleft, swiperight -- for mobile feel.
-//
-// Examine how badly we want to remove hashes from URLs:
-// http://jquerymobile.com/demos/1.1.0/docs/api/methods.html
-// http://jquerymobile.com/demos/1.1.0/docs/pages/page-navmodel.html
-// http://stackoverflow.com/a/8397414/234025
-//
-// Also, we have to look at http://forum.jquery.com/topic/unequal-layout-grids-columns-or-colspan-like-behavior
-// because I did some CSS naughtiness.
 Array.prototype.rotate = function( n ) {
   this.unshift.apply( this, this.splice( n, this.length ) )
   return this;
@@ -122,7 +112,6 @@ $(document).ready(function () {
   function resetApp() {
     var url = $.mobile.path.parseUrl(window.location.href);
     window.location.href = url.hrefNoHash;
-    $("div[data-role='page']").slice(1, -1).remove();
   }
 
   $(document).on("pagebeforechange", function (e, data) {
@@ -133,8 +122,7 @@ $(document).ready(function () {
         drawRemainingPages();
       } else if (data.toPage.match(/#results-0$/)) {
         calculate();
-      } else if (data.toPage.match(/#home-page$/)) {
-        e.preventDefault();
+      } else if (data.toPage.match(/index.html$/)) {
         resetApp();
       }
     }
