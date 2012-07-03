@@ -21,6 +21,8 @@ Calculate = {
 
         if(vamp === currentVamp)
           continue;
+        if(drunkBlood === 0)
+          continue;
 
         if(drunkBlood > el['ratings'][vamp]) {
           ratings[currentVamp][vamp] = RPS.mean_rating_change();
