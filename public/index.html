@@ -32,7 +32,7 @@
   </head>
 
   <body>
-    <div id="home-page" data-role="page">
+    <div id="home-page" data-role="page" data-theme="a">
       <div data-role="header">
         <h1>Vaulderie</h1>
       </div>
@@ -57,7 +57,7 @@
 
     <script id="char-inputs" type="text/x-jquery-tmpl">
       <div class="ui-block-a">
-        <input type="text" id="char-{{:id}}-name" value="{{:name}}" placeholder="{{:placeholder}}" />
+        <input type="text" id="char-{{:id}}-name" value="{{:name}}" placeholder="Character Name" />
       </div>
       <div class="ui-block-b">
         <select id="char-{{:id}}">
@@ -77,9 +77,9 @@
     </script>
 
     <script id='char-results' type='text/x-jquery-tmpl'>
-      <div id="results-{{:id}}" data-role="page">
+      <div id="results-{{:id}}" data-role="page" data-theme="a">
         <div data-role="header">
-          <h1>Vaulderie results for {{:name}}</h1>
+          <h1>{{:name}}</h1>
         </div>
         <div data-role="content">
           {{fields ratings}}

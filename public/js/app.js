@@ -21,11 +21,12 @@ $(document).ready(function () {
     var number = charCount(),
     grid   = $("<div />").addClass("ui-grid-a").attr({ "id": "bar" });
 
-    grid.append($("#char-inputs").render({name:names[0], id: 0, placeholder: 'Character Name and contribution to pool' }));
-    grid.append("<br/><br/><hr style='height:10px;'>");
+    grid.append("<h3>Contribution</h3>");
+    grid.append($("#char-inputs").render({name:names[0], id: 0}));
+    grid.append("<h3>Bond Rating</h3>");
 
     for (var i=1; i < number; i++) {
-      grid.append($("#char-inputs").render({name:names[i], id: i, placeholder: 'Name of other character and rating to her' }));
+      grid.append($("#char-inputs").render({name:names[i], id: i}));
     }
     return grid;
   }
@@ -34,7 +35,7 @@ $(document).ready(function () {
     var page    = $("<div />"),
     content = "";
 
-    page.attr({ "data-role": "page", id: "char-1" });
+    page.attr({ "data-role": "page", "data-theme": "a", id: "char-1" });
     page.append("<div data-role='header'><h1>Vaulderie</h1></div>");
 
     content = $("<div />").attr({ "data-role":"content" }).append(drawGrid([]));
@@ -54,7 +55,7 @@ $(document).ready(function () {
       currentCharOrder = charNames.slice(0);
       currentCharOrder.rotate(i-1);
       page = $("<div />");
-      page.attr({ "data-role": "page", id: "char-" + i });
+      page.attr({ "data-role": "page", "data-theme": "a", id: "char-" + i });
       page.append("<div data-role='header'><h1>Vaulderie</h1></div>");
 
       content = $("<div />").attr({ "data-role":"content" }).append(drawGrid(currentCharOrder));
@@ -65,6 +66,7 @@ $(document).ready(function () {
       }
       page.append(content);
       $("#home-page").parent().append(page);
+      $("input[type='text']").attr({"disabled": "disabled"});
     }
   };
 
