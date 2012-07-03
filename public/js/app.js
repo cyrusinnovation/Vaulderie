@@ -8,33 +8,36 @@
 //
 // Also, we have to look at http://forum.jquery.com/topic/unequal-layout-grids-columns-or-colspan-like-behavior
 // because I did some CSS naughtiness.
-
+Array.prototype.rotate = function( n ) {
+  this.unshift.apply( this, this.splice( n, this.length ) )
+  return this;
+}
 $(document).ready(function () {
   function charCount() {
     return parseInt($("#char-count").val(), 10);
   }
 
-  function drawGrid() {
+  function drawGrid(names) {
     var number = charCount(),
     grid   = $("<div />").addClass("ui-grid-a").attr({ "id": "bar" });
 
-    grid.append($("#char-inputs").render({ id: i, placeholder: 'Character Name and contribution to pool' }));
+    grid.append($("#char-inputs").render({name:names[0], id: 0, placeholder: 'Character Name and contribution to pool' }));
     grid.append("<br/><br/><hr style='height:10px;'>");
 
     for (var i=1; i < number; i++) {
-      grid.append($("#char-inputs").render({ id: i, placeholder: 'Name of other character and rating to her' }));
+      grid.append($("#char-inputs").render({name:names[i], id: i, placeholder: 'Name of other character and rating to her' }));
     }
     return grid;
   }
 
   function drawFirstPage() {
     var page    = $("<div />"),
-        content = "";
+    content = "";
 
     page.attr({ "data-role": "page", id: "char-1" });
     page.append("<div data-role='header'><h1>Vaulderie</h1></div>");
 
-    content = $("<div />").attr({ "data-role":"content" }).append(drawGrid());
+    content = $("<div />").attr({ "data-role":"content" }).append(drawGrid([]));
     content.append("<a href='#char-2' data-role='button'>Next</a>");
     page.append(content);
     $("#home-page").parent().append(page);
@@ -42,15 +45,19 @@ $(document).ready(function () {
 
   function drawRemainingPages() {
     var page,
-        content,
-        charNumber = charCount();
-    
+    content,
+    currentCharOrder,
+    charNumber = charCount(),
+    charNames = getNames(1);
+
     for (var i=2; i <= charNumber; i++) {
+      currentCharOrder = charNames.slice(0);
+      currentCharOrder.rotate(i-1);
       page = $("<div />");
       page.attr({ "data-role": "page", id: "char-" + i });
       page.append("<div data-role='header'><h1>Vaulderie</h1></div>");
 
-      content = $("<div />").attr({ "data-role":"content" }).append(drawGrid());
+      content = $("<div />").attr({ "data-role":"content" }).append(drawGrid(currentCharOrder));
       if(i === charNumber) {
         content.append("<a href='#results-0' data-role='button'>Calculate</a>");
       } else {
@@ -61,12 +68,13 @@ $(document).ready(function () {
     }
   };
 
+  function getNames(charNum) {
+    return $("#char-" + charNum + " input[type='text']").map(function(idx, el) {
+      return $(el).val();
+    }).toArray();
+  }
+
   function calculate() {
-    function getNames(charNum) {
-      return $("#char-" + charNum + " input[type='text']").map(function(idx, el) {
-        return $(el).val();
-      }).toArray();
-    }
 
     function getValues(charNum) {
       return $("#char-" + charNum + " select").map(function(idx, el) {
@@ -75,10 +83,10 @@ $(document).ready(function () {
     }
 
     var charNumber = charCount(),
-        result = [],
-        row,
-        names,
-        values;
+    result = [],
+    row,
+    names,
+    values;
 
     for (var i=1; i <= charNumber; i++) {
       row = {};
