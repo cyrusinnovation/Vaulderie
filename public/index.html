@@ -11,19 +11,23 @@
     <script type="text/javascript" src="./js/app.js"></script>
     <script type="text/javascript">
       $.views.tags({
-fields: function( object ) {
-var key,
-ret = "";
-for ( key in object ) {
-if ( object.hasOwnProperty( key )) {
-// For each property/field, render the content of the {{fields object}} tag, with "~key" as template parameter
-ret += this.renderContent( object[ key ], { key: key });
-}
-}
-return ret;
-}
-});
-</script>
+      fields: function( object ) {
+      var key,
+      ret = "";
+      for ( key in object ) {
+      if ( object.hasOwnProperty( key )) {
+      // For each property/field, render the content of the {{fields object}} tag, with "~key" as template parameter
+      ret += this.renderContent( object[ key ], { key: key });
+      }
+      }
+      return ret;
+      }
+      });
+    </script>
+    <style type="text/css">
+      .ui-grid-a .ui-block-a { width: 65% }
+      .ui-grid-a .ui-block-b { width: 35%; } 
+    </style>
   </head>
 
   <body>
@@ -61,7 +65,7 @@ return ret;
 
     <script id="char-inputs" type="text/x-jquery-tmpl">
       <div class="ui-block-a">
-        <input type="text" id="char-{{:id}}-name" placeholder="Character Name" />
+        <input type="text" id="char-{{:id}}-name" placeholder="{{:placeholder}}" />
       </div>
       <div class="ui-block-b">
         <select id="char-{{:id}}">

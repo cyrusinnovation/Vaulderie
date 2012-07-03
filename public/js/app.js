@@ -1,3 +1,14 @@
+// remember: http://jquerymobile.com/demos/1.1.0/docs/api/events.html
+// tap, taphold, swipe, swipeleft, swiperight -- for mobile feel.
+//
+// Examine how badly we want to remove hashes from URLs:
+// http://jquerymobile.com/demos/1.1.0/docs/api/methods.html
+// http://jquerymobile.com/demos/1.1.0/docs/pages/page-navmodel.html
+// http://stackoverflow.com/a/8397414/234025
+//
+// Also, we have to look at http://forum.jquery.com/topic/unequal-layout-grids-columns-or-colspan-like-behavior
+// because I did some CSS naughtiness.
+
 $(document).ready(function () {
   function charCount() {
     return parseInt($("#char-count").val(), 10);
@@ -5,10 +16,12 @@ $(document).ready(function () {
 
   function drawGrid() {
     var number = charCount(),
-        grid   = $("<div />").addClass("ui-grid-a").attr({ "id": "bar" });
+    grid   = $("<div />").addClass("ui-grid-a").attr({ "id": "bar" });
 
-    for (var i=0; i < number; i++) {
-      grid.append($("#char-inputs").render({ id: i }));
+    grid.append($("#char-inputs").render({ id: i, placeholder: 'Character Name and contribution to pool' }));
+    grid.append("<br/><br/><hr style='height:10px;'>");
+    for (var i=1; i < number; i++) {
+      grid.append($("#char-inputs").render({ id: i, placeholder: 'Bond rating to other character' }));
     }
     return grid;
   }
