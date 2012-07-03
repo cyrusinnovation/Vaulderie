@@ -19,16 +19,18 @@ $(document).ready(function () {
 
   function drawGrid(names) {
     var number = charCount(),
-    grid   = $("<div />").addClass("ui-grid-a").attr({ "id": "bar" });
+    grid = $("<div />"),
+    gridForCurrentChar   = $("<div />").addClass("ui-grid-a"),
+    gridForOtherChars   = $("<div />").addClass("ui-grid-a");
 
-    grid.append("<h3>Contribution</h3>");
-    grid.append($("#char-inputs").render({name:names[0], id: 0}));
-    grid.append("<h3>Bond Rating</h3>");
+    gridForCurrentChar.append("<h3 style='text-align:center;'>Contribution</h3>");
+    gridForCurrentChar.append($("#char-inputs").render({name:names[0], id: 0}));
+    gridForOtherChars.append("<h3 style='text-align:center;'>Bond Rating</h3>");
 
     for (var i=1; i < number; i++) {
-      grid.append($("#char-inputs").render({name:names[i], id: i}));
+      gridForOtherChars.append($("#char-inputs").render({name:names[i], id: i}));
     }
-    return grid;
+    return grid.append(gridForCurrentChar).append(gridForOtherChars).html();
   }
 
   function drawFirstPage() {
@@ -117,6 +119,12 @@ $(document).ready(function () {
     $('body').append($("#char-results").render(data));
   };
 
+  function resetApp() {
+    var url = $.mobile.path.parseUrl(window.location.href);
+    window.location.href = url.hrefNoHash;
+    $("div[data-role='page']").slice(1, -1).remove();
+  }
+
   $(document).on("pagebeforechange", function (e, data) {
     if (typeof data.toPage === "string") {
       if (data["options"].fromPage[0]["id"] === "home-page") {
@@ -125,6 +133,9 @@ $(document).ready(function () {
         drawRemainingPages();
       } else if (data.toPage.match(/#results-0$/)) {
         calculate();
+      } else if (data.toPage.match(/#home-page$/)) {
+        e.preventDefault();
+        resetApp();
       }
     }
   });

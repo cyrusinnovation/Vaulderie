@@ -27,7 +27,8 @@
     </script>
     <style type="text/css">
       .ui-grid-a .ui-block-a { width: 65% }
-      .ui-grid-a .ui-block-b { width: 35%; } 
+      .ui-grid-a .ui-block-b { width: 35%; }
+      .field input { margin-bottom: 1em; }
     </style>
   </head>
 
@@ -56,8 +57,8 @@
     </div>
 
     <script id="char-inputs" type="text/x-jquery-tmpl">
-      <div class="ui-block-a">
-        <input type="text" id="char-{{:id}}-name" value="{{:name}}" placeholder="Character Name" />
+      <div class="ui-block-a field">
+        <input type="text" id="char-{{:id}}-name" {{:enabled}} value="{{:name}}" placeholder="Character Name" />
       </div>
       <div class="ui-block-b">
         <select id="char-{{:id}}">
@@ -82,15 +83,25 @@
           <h1>{{:name}}</h1>
         </div>
         <div data-role="content">
-          {{fields ratings}}
-          <div>
-            {{>~key}}: {{>#data}}
-          </div>
-          {{/fields}}
+          <table style="border: 1px solid #fff;">
+            <thead>
+              <th>Name</th>
+              <th>New Bond Rating</th>
+            </thead>
+            <tbody>
+              {{fields ratings}}
+              <tr >
+                <td>{{>~key}}</td>
+                <td style="text-align: center;">{{>#data}}</td>
+              </tr>
+              {{/fields}}
+            </tbody>
+          </table>
           {{if nextPage}}
           <a href="#results-{{:nextPage}}" data-role="button">Next!</a>
           {{else}}
             <h2> Now go forth and LARP!</h2>
+            <a href="index.html">Let's do that again!</a>
           {{/if}}
         </div>        
       </div>
