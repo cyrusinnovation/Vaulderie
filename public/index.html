@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Vaulderie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./js/jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.css" />
     <script type="text/javascript" src='./js/rps.js'></script>
     <script type="text/javascript" src='./js/pool.js'></script>
@@ -54,15 +55,6 @@
       </div>
     </div>
 
-    <div id="calculate" data-role="page">
-      <div data-role="header">
-        <h1>Results</h1>
-      </div>
-      <div class='body' data-role="content">
-        At some point, Javascript will happen before this.
-      </div>
-    </div>
-
     <script id="char-inputs" type="text/x-jquery-tmpl">
       <div class="ui-block-a">
         <input type="text" id="char-{{:id}}-name" placeholder="{{:placeholder}}" />
@@ -84,10 +76,23 @@
     </script>
 
     <script id='char-results' type='text/x-jquery-tmpl'>
-      <div>{{:name}}</div>
-      {{fields ratings}}
-      <div>{{>~key}}: {{>#data}}</div>
-      {{/fields}}
+      <div id="results-{{:id}}" data-role="page">
+        <div data-role="header">
+          <h1>{{:name}}</h1>
+        </div>
+        <div data-role="content">
+          {{fields ratings}}
+          <div>
+            {{>~key}}: {{>#data}}
+          </div>
+          {{/fields}}
+          {{if nextPage}}
+          <a href="#results-{{:nextPage}}" data-role="button">Next!</a>
+          {{else}}
+            <h2> Now go forth and LARP!</h2>
+          {{/if}}
+        </div>        
+      </div>
     </script>
 
 

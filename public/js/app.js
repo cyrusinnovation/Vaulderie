@@ -20,8 +20,9 @@ $(document).ready(function () {
 
     grid.append($("#char-inputs").render({ id: i, placeholder: 'Character Name and contribution to pool' }));
     grid.append("<br/><br/><hr style='height:10px;'>");
+
     for (var i=1; i < number; i++) {
-      grid.append($("#char-inputs").render({ id: i, placeholder: 'Bond rating to other character' }));
+      grid.append($("#char-inputs").render({ id: i, placeholder: 'Name of other character and rating to her' }));
     }
     return grid;
   }
@@ -34,7 +35,7 @@ $(document).ready(function () {
     page.append("<div data-role='header'><h1>Vaulderie</h1></div>");
 
     content = $("<div />").attr({ "data-role":"content" }).append(drawGrid());
-    content.append("<a href='#char-2'>Next</a>");
+    content.append("<a href='#char-2' data-role='button'>Next</a>");
     page.append(content);
     $("#home-page").parent().append(page);
   };
@@ -51,9 +52,9 @@ $(document).ready(function () {
 
       content = $("<div />").attr({ "data-role":"content" }).append(drawGrid());
       if(i === charNumber) {
-        content.append("<a href='#calculate'>Calculate</a>");
+        content.append("<a href='#results-0' data-role='button'>Calculate</a>");
       } else {
-        content.append("<a href='#char-" + (i+1) + "'>Next</a>");
+        content.append("<a href='#char-" + (i+1) + "' data-role='button'>Next</a>");
       }
       page.append(content);
       $("#home-page").parent().append(page);
@@ -97,7 +98,13 @@ $(document).ready(function () {
   };
 
   function showResults(data) {
-    $('#calculate .body').html($("#char-results").render(data));
+    data.forEach(function(el, idx) {
+      el['id'] = idx;
+      if(idx < data.length - 1) {
+        el['nextPage'] = idx + 1;
+      }
+    });
+    $('body').append($("#char-results").render(data));
   };
 
   $(document).on("pagebeforechange", function (e, data) {
@@ -106,7 +113,7 @@ $(document).ready(function () {
         drawFirstPage();
       } else if (data["options"].fromPage[0]["id"] === "char-1") {
         drawRemainingPages();
-      } else if (data.toPage.match(/#calculate$/)) {
+      } else if (data.toPage.match(/#results-0$/)) {
         calculate();
       }
     }
