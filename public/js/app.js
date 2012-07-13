@@ -34,7 +34,7 @@ $(document).ready(function () {
     content.append("<a href='#char-2' data-role='button'>Next</a>");
     page.append(content);
     $("#home-page").parent().append(page);
-  };
+  }
 
   function drawRemainingPages() {
     var page,
@@ -60,7 +60,7 @@ $(document).ready(function () {
       $("#home-page").parent().append(page);
       $("input[type='text']").attr({"disabled": "disabled"});
     }
-  };
+  }
 
   function getNames(charNum) {
     return $("#char-" + charNum + " input[type='text']").map(function(idx, el) {
@@ -97,7 +97,7 @@ $(document).ready(function () {
     }
 
     showResults(Calculate.ratings(result));
-  };
+  }
 
   function showResults(data) {
     data.forEach(function(el, idx) {
@@ -107,16 +107,25 @@ $(document).ready(function () {
       }
     });
     $('body').append($("#char-results").render(data));
-  };
+  }
 
   function resetApp() {
     var url = $.mobile.path.parseUrl(window.location.href);
     window.location.href = url.hrefNoHash;
   }
 
+  function removeExistingDivs() {
+    console.log("hello");
+    $('div[id^="char"]').remove();
+    $('div[id^="results"]').remove();
+  }
+
   $(document).on("pagebeforechange", function (e, data) {
     if (typeof data.toPage === "string") {
-      if (data["options"].fromPage[0]["id"] === "home-page") {
+      console.log(data);
+      if (data.toPage.match(/#char-1$/)) {
+//      if (data["options"].fromPage[0]["id"] === "home-page") {
+        removeExistingDivs();
         drawFirstPage();
       } else if (data["options"].fromPage[0]["id"] === "char-1") {
         drawRemainingPages();
