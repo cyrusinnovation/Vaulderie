@@ -115,16 +115,13 @@ $(document).ready(function () {
   }
 
   function removeExistingDivs() {
-    console.log("hello");
     $('div[id^="char"]').remove();
     $('div[id^="results"]').remove();
   }
 
   $(document).on("pagebeforechange", function (e, data) {
     if (typeof data.toPage === "string") {
-      console.log(data);
       if (data.toPage.match(/#char-1$/)) {
-//      if (data["options"].fromPage[0]["id"] === "home-page") {
         removeExistingDivs();
         drawFirstPage();
       } else if (data["options"].fromPage[0]["id"] === "char-1") {
@@ -136,4 +133,15 @@ $(document).ready(function () {
       }
     }
   });
+
+  document.addEventListener("backbutton", function(e){
+    if($.mobile.activePage.is('#homepage') || $.mobile.activePage.html().match(/LARP/)){
+      e.preventDefault();
+      navigator.app.exitApp();
+    }
+    else {
+      navigator.app.backHistory()
+    }
+  }, false);
+
 });
