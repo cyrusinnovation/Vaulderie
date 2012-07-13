@@ -2,6 +2,11 @@ Array.prototype.rotate = function( n ) {
   this.unshift.apply( this, this.splice( n, this.length ) )
   return this;
 }
+
+V = {};
+V['name'] = 'homepage';
+V['home'] = '#' + V['name'];
+
 $(document).ready(function () {
   function charCount() {
     return parseInt($("#char-count").val(), 10);
@@ -24,6 +29,7 @@ $(document).ready(function () {
   }
 
   function drawFirstPage() {
+    removeExistingDivs();
     var page    = $("<div />"),
     content = "";
 
@@ -33,7 +39,7 @@ $(document).ready(function () {
     content = $("<div />").attr({ "data-role":"content" }).append(drawGrid([]));
     content.append("<a href='#char-2' data-role='button'>Next</a>");
     page.append(content);
-    $("#home-page").parent().append(page);
+    $(V['home']).parent().append(page);
   }
 
   function drawRemainingPages() {
@@ -57,7 +63,7 @@ $(document).ready(function () {
         content.append("<a href='#char-" + (i+1) + "' data-role='button'>Next</a>");
       }
       page.append(content);
-      $("#home-page").parent().append(page);
+      $(V['home']).parent().append(page);
       $("input[type='text']").attr({"disabled": "disabled"});
     }
   }
@@ -121,8 +127,9 @@ $(document).ready(function () {
 
   $(document).on("pagebeforechange", function (e, data) {
     if (typeof data.toPage === "string") {
-      if (data.toPage.match(/#char-1$/)) {
-        removeExistingDivs();
+      console.log(data);
+      console.log(V);
+      if (data["options"].fromPage[0]["id"] === V['name'] && data.toPage.match(/#char-1$/)) {
         drawFirstPage();
       } else if (data["options"].fromPage[0]["id"] === "char-1") {
         drawRemainingPages();
@@ -135,7 +142,7 @@ $(document).ready(function () {
   });
 
   document.addEventListener("backbutton", function(e){
-    if($.mobile.activePage.is('#homepage') || $.mobile.activePage.html().match(/LARP/)){
+    if($.mobile.activePage.is(V['home']) || $.mobile.activePage.html().match(/LARP/)){
       e.preventDefault();
       navigator.app.exitApp();
     }
