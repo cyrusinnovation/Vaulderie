@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>TestApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.css"/>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.js"></script>
+    <script type="text/javascript">
+
+      function onBackButton(e) {
+        <!--e.preventDefault();-->
+        navigator.notification.alert("HAHA");
+        navigator.app.backHistory();
+        <!--navigator.app.exitApp();-->
+      }
+      function onDeviceReady() {
+        $(document).bind('pageshow', function(e, data) {
+            document.addEventListener('backbutton', onBackButton, true);
+        });
+      }
+
+      $(document).ready( function() {
+
+        document.addEventListener("deviceready", onDeviceReady, true);
+      });
+
+    </script>
+    <script type="test/javascript" src='cordova-1.8.1.js'></script>
+
+
+</head>
+
+<body>
+  <div id="homepage" data-role="page" data-theme="a">
+    <div data-role="header">
+      <h1>Work with me here</h1>
+    </div>
+
+    <div data-role="content">
+      I am page 1.
+      <a href="#char-1" data-role="button">Next</a>
+    </div>
+  </div>
+
+  <div id="char-1" data-role="page" data-theme="a">
+    <div data-role="content">HAHAHA!</div>
+  </div>
+
+
+</body>
+</html>
