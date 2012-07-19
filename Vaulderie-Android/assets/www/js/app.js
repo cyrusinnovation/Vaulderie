@@ -15,23 +15,18 @@ $(document).ready(function () {
     }
   }
 
-  function onBackButton() {
+  function onBackButton(e) {
 
-  navigator.notification.alert("YABA!");
-
-//    console.log("here I am");
-//    if( $.mobile.activePage.is('#homepage') || /LARP/.test($.mobile.activePage.html()) ){
-//      console.log("Hello babies");
-//      //e.preventDefault();
-//      navigator.notification.confirm('Do you want to quit?',
-//                                     onConfirmQuit,
-//                                     'Exit the app',
-//                                     'OK,cancel');
-//    }
-//    else {
-//      console.log("BACK WAS PRESSED");
-//      navigator.app.backHistory();
-//    }
+    if( $.mobile.activePage.is('#homepage') || /LARP/.test($.mobile.activePage.html()) ){
+      e.preventDefault();
+      navigator.notification.confirm('Do you want to quit?',
+                                     onConfirmQuit,
+                                     'Exit the app',
+                                     'OK,cancel');
+    }
+    else {
+      navigator.app.backHistory();
+    }
   }
 
   function onDeviceReady() {
