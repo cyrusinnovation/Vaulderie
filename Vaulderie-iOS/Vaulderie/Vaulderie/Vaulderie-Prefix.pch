@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Vaulderie' target in the 'Vaulderie' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+#endif
