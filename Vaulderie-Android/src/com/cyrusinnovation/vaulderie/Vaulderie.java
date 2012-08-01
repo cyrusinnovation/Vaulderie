@@ -2,7 +2,7 @@ package com.cyrusinnovation.vaulderie;
 
 import android.app.Activity;
 import android.os.Bundle;
-//import android.webkit.WebResourceResponse;
+import android.webkit.WebResourceResponse;
 import org.apache.cordova.*;
 import org.apache.cordova.DroidGap;
 
