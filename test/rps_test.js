@@ -1,7 +1,7 @@
-var sinon = require('../../node_modules/sinon/lib/sinon.js');
+var sinon = require('sinon');
 var mock = sinon.mock;
 var stub = sinon.stub;
-require('../public/js/rps');
+require('../www/js/rps');
 
 function ok(expr, msg) {
   if (!expr) throw new Error(msg);

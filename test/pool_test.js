@@ -1,4 +1,4 @@
-require('../public/js/pool');
+require('../www/js/pool');
 
 function ok(expr, msg) {
   if (!expr) throw new Error(msg);

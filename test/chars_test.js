@@ -1,4 +1,4 @@
-require('../public/js/chars');
+require('../www/js/chars');
 
 function ok(expr, msg) {
   if (!expr) throw new Error(msg);
