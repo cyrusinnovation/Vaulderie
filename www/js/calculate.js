@@ -26,7 +26,6 @@ Calculate = {
         if(vampire['ratings'][rating] < 1) vampire['ratings'][rating] = 1;
       }
     });
-
     return ratings;
   },
  
@@ -75,6 +74,5 @@ Calculate = {
     var newRatings = this.diffRatings(startingValues, ratingChanges);
     return this.minimumRatingIsOne(this.unSpinalTap(newRatings));
   }
-
-};
+}
 

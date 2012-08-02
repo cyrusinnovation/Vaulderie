@@ -10,6 +10,25 @@ Calculate = {
     return bloodGiven;
   },
 
+  unSpinalTap: function(ratings) {
+    console.log(ratings);
+    ratings.forEach(function(vampire) {
+      for(var rating in vampire['ratings']) {
+        if(vampire['ratings'][rating] === 11) vampire['ratings'][rating] = 10;
+      }
+    });
+    return ratings;
+  },
+
+  minimumRatingIsOne: function(ratings) {
+    ratings.forEach(function(vampire) {
+      for(var rating in vampire['ratings']) {
+        if(vampire['ratings'][rating] < 1) vampire['ratings'][rating] = 1;
+      }
+    });
+    return ratings;
+  },
+ 
   generateRatings: function(startingValues, bloodFromPool) {
     var ratings = {};
     startingValues.forEach(function(el) {
@@ -35,7 +54,7 @@ Calculate = {
     return ratings;
   },
 
-  diffRatings: function(startingValues, ratingChanges) {
+ diffRatings: function(startingValues, ratingChanges) {
     var newRatings = startingValues.slice(0);
     for(var vampire in startingValues) {
       var currentVamp = startingValues[vampire];
@@ -53,8 +72,7 @@ Calculate = {
     var bloodDrawnBackFromPool = Pool.redistribute(this.getBloodGiven(startingValues));
     var ratingChanges = this.generateRatings(startingValues, bloodDrawnBackFromPool);
     var newRatings = this.diffRatings(startingValues, ratingChanges);
-    return newRatings;
+    return this.minimumRatingIsOne(this.unSpinalTap(newRatings));
   }
-
-};
+}
 
